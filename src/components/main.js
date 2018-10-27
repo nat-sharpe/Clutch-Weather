@@ -2,41 +2,32 @@ import React, {Component} from 'react';
 
 class Main extends Component {
   render() {
+    const forecastRows = [];
+    const forecastData = this.props.state.currentForecast;
+    forecastData.forEach((dayData, index) => {
+      let day = (index === 0) ? 'Today' : dayData.day;
+      forecastRows.push(
+        <li className="forecast-row" key={index}>
+          <p>{day}</p>
+          <p>{dayData.text}</p>
+          <p>{dayData.high}°</p>
+          <p>{dayData.low}°</p>
+        </li>
+      )
+    });
+
     return (
       <div className="main">
         <div className="header">
           <h1>Clutch Weather</h1>
         </div>
         <div className="current">
-          <h2>Atlanta</h2>
-          <h3>Cloudy</h3>
-          <h1>41°</h1>
+          <h2>{this.props.state.currentCondition.city}</h2>
+          <h3>{this.props.state.currentCondition.text}</h3>
+          <h1>{this.props.state.currentCondition.temp}°</h1>
         </div>
         <ul className="forecast">
-          <li className="forecast-row">
-            <p>Today</p>
-            <p>Cloudy</p>
-            <p>20°</p>
-            <p>60°</p>
-          </li>
-          <li className="forecast-row">
-            <p>Tuesday</p>
-            <p>Sunny</p>
-            <p>30°</p>
-            <p>40°</p>
-          </li>
-          <li className="forecast-row">
-            <p>Wednesday</p>
-            <p>Cloudy</p>
-            <p>40°</p>
-            <p>50°</p>
-          </li>
-          <li className="forecast-row">
-            <p>Thursday</p>
-            <p>Rainy</p>
-            <p>20°</p>
-            <p>50°</p>
-          </li>
+          {forecastRows}
         </ul>
         <div className="nav">
           <div className="location-toggle">

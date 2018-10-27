@@ -12,7 +12,10 @@ class App extends Component {
           state: 'GA'
         }
       ],
-      currentLocation: 'Atlanta, GA',
+      currentLocation: {
+        city: 'Atlanta',
+        state: 'GA'
+      },
       currentCondition: {},
       currentForecast: []
     };
@@ -20,7 +23,7 @@ class App extends Component {
 
   componentDidMount() {
     const getWeather = () => {
-      fetch(`https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${this.state.currentLocation}")&format=json`)
+      fetch(`https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${this.state.currentLocation.city}, ${this.state.currentLocation.state}")&format=json`)
         .then(data => {
           const jsonResult = data.json();
           jsonResult.then(parsedData => {
@@ -57,7 +60,7 @@ class App extends Component {
 
   render() {
     return (
-      <Main />
+      <Main state={this.state}/>
     );
   };
 };
