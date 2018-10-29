@@ -27,40 +27,44 @@ class App extends Component {
       },
       currentCondition: {},
       currentForecast: [],
+      showMain: false,
+      showChooseLocations: false,
+      showAddLocation: false,
     };
   };
 
   getWeather = () => {
     fetch(`https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${this.state.currentLocation.city}, ${this.state.currentLocation.region}")&format=json`)
-      .then(data => {
-        const jsonResult = data.json();
-        jsonResult.then(parsedData => {
-          const conditionData = {
-            city: parsedData.query.results.channel.location.city,
-            text: parsedData.query.results.channel.item.condition.text,
-            temp: parsedData.query.results.channel.item.condition.temp
+    .then(data => {
+      const jsonResult = data.json();
+      jsonResult.then(parsedData => {
+        const conditionData = {
+          city: parsedData.query.results.channel.location.city,
+          text: parsedData.query.results.channel.item.condition.text,
+          temp: parsedData.query.results.channel.item.condition.temp
+        };
+        this.setState({
+          currentCondition: conditionData
+        })
+        console.log(this.state.currentCondition)
+        const nextFourDays = parsedData.query.results.channel.item.forecast;
+        let dayArray = [];
+        for (let ii = 0; ii < 4; ii++) {
+          let dayData = {
+            day: nextFourDays[ii].day,
+            text: nextFourDays[ii].text,     
+            high: nextFourDays[ii].high,
+            low: nextFourDays[ii].low
           };
-          this.setState({
-            currentCondition: conditionData
-          })
-          console.log(this.state.currentCondition)
-          const nextFourDays = parsedData.query.results.channel.item.forecast;
-          let dayArray = [];
-          for (let ii = 0; ii < 4; ii++) {
-            let dayData = {
-              day: nextFourDays[ii].day,
-              text: nextFourDays[ii].text,     
-              high: nextFourDays[ii].high,
-              low: nextFourDays[ii].low
-            };
-            dayArray.push(dayData);
-          };
-          this.setState({ 
-            currentForecast: dayArray
-          }); 
-        });
-      }) 
-    };
+          dayArray.push(dayData);
+        };
+        this.setState({
+          showMain: true, 
+          currentForecast: dayArray
+        }); 
+      });
+    }) 
+  };
 
   toggleCity = () => {
     let nextIndex; 
@@ -85,9 +89,12 @@ class App extends Component {
   };
 
   render() {
-    return (
-      <Main state={this.state} toggleCity={this.toggleCity}/>
-    );
+    if (this.state.showMain) {
+      return <Main state={this.state} toggleCity={this.toggleCity}/>
+      }
+    else {
+      return <h3>Loading...</h3>
+    }
   };
 };
 
