@@ -63,7 +63,12 @@ class App extends Component {
     };
 
   toggleCity = () => {
-    const nextIndex = (this.state.currentLocation.index + 1);
+    let nextIndex; 
+    if (this.state.currentLocation.index === (this.state.savedLocations.length - 1)) {
+      nextIndex = 0; 
+    } else {
+      nextIndex = (this.state.currentLocation.index + 1); 
+    };
     const newLocation = {
       city: this.state.savedLocations[nextIndex].city,
       region: this.state.savedLocations[nextIndex].region,
