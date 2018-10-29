@@ -1,5 +1,6 @@
 import React, {Component} from 'react';
 import Main from './components/main';
+import Choose from './components/choose';
 
 class App extends Component {
 
@@ -27,13 +28,14 @@ class App extends Component {
       },
       currentCondition: {},
       currentForecast: [],
-      showMain: false,
-      showChooseLocations: false,
-      showAddLocation: false,
+      showMain: true,
+      showChoose: true,
+      showAdd: false,
     };
   };
 
   getWeather = () => {
+    console.log('city' + this.state.currentLocation.city)
     fetch(`https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${this.state.currentLocation.city}, ${this.state.currentLocation.region}")&format=json`)
     .then(data => {
       const jsonResult = data.json();
@@ -59,14 +61,36 @@ class App extends Component {
           dayArray.push(dayData);
         };
         this.setState({
-          showMain: true, 
           currentForecast: dayArray
         }); 
       });
     }) 
   };
 
-  toggleCity = () => {
+  componentDidMount() {
+    this.getWeather();
+  };
+
+  toggleLocation = () => {
+    let nextIndex; 
+    if (this.state.currentLocation.index === (this.state.savedLocations.length - 1)) {
+      nextIndex = 0; 
+    } else {
+      nextIndex = (this.state.currentLocation.index + 1); 
+    };
+    const newLocation = {
+      city: this.state.savedLocations[nextIndex].city,
+      region: this.state.savedLocations[nextIndex].region,
+      index: nextIndex
+    };
+    console.log(newLocation)
+    this.setState({ 
+      currentLocation: newLocation
+    }, 
+      this.getWeather);
+  };
+
+  chooseLocation = () => {
     let nextIndex; 
     if (this.state.currentLocation.index === (this.state.savedLocations.length - 1)) {
       nextIndex = 0; 
@@ -84,16 +108,11 @@ class App extends Component {
       this.getWeather);
   };
 
-  componentDidMount() {
-    this.getWeather();
-  };
-
   render() {
     if (this.state.showMain) {
-      return <Main state={this.state} toggleCity={this.toggleCity}/>
-      }
-    else {
-      return <h3>Loading...</h3>
+      return <Main state={this.state} toggleLocation={this.toggleLocation}/>
+    } else if (this.state.showChoose) {
+      return <Choose state={this.state} />
     }
   };
 };

@@ -30,11 +30,11 @@ class Main extends Component {
         </ul>
         <div className="nav">
           <div className="location-toggle">
-            <button onClick={this.props.toggleCity} type="button">Toggle Locations</button>
+            <button onClick={this.props.toggleLocation} type="button">Toggle Locations</button>
           </div>  
           <div className="location-all">
-            <h3>All Locations</h3>
-          </div>
+            <button onClick={this.props.chooseLocation} type="button">All Locations</button>
+          </div> 
         </div>
       </div>
     );
