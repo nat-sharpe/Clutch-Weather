@@ -15,7 +15,6 @@ class Main extends Component {
         </li>
       )
     });
-
     return (
       <div className="main">
         <div className="header">
@@ -31,7 +30,7 @@ class Main extends Component {
         </ul>
         <div className="nav">
           <div className="location-toggle">
-            <h3>Toggle Locations</h3>
+            <button onClick={this.props.toggleCity} type="button">Toggle Locations</button>
           </div>  
           <div className="location-all">
             <h3>All Locations</h3>

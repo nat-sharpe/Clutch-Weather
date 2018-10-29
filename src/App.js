@@ -9,58 +9,79 @@ class App extends Component {
       savedLocations: [
         {
           city: 'Atlanta',
-          state: 'GA'
+          region: 'GA'
+        },
+        {
+          city: 'New York',
+          region: 'NY'
+        },
+        {
+          city: 'San Francisco',
+          region: 'CA'
         }
       ],
       currentLocation: {
         city: 'Atlanta',
-        state: 'GA'
+        region: 'GA',
+        index: 0
       },
       currentCondition: {},
-      currentForecast: []
+      currentForecast: [],
     };
   };
 
-  componentDidMount() {
-    const getWeather = () => {
-      fetch(`https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${this.state.currentLocation.city}, ${this.state.currentLocation.state}")&format=json`)
-        .then(data => {
-          const jsonResult = data.json();
-          jsonResult.then(parsedData => {
-            const conditionData = {
-              city: parsedData.query.results.channel.location.city,
-              text: parsedData.query.results.channel.item.condition.text,
-              temp: parsedData.query.results.channel.item.condition.temp
+  getWeather = () => {
+    fetch(`https://query.yahooapis.com/v1/public/yql?q=select * from weather.forecast where woeid in (select woeid from geo.places(1) where text="${this.state.currentLocation.city}, ${this.state.currentLocation.region}")&format=json`)
+      .then(data => {
+        const jsonResult = data.json();
+        jsonResult.then(parsedData => {
+          const conditionData = {
+            city: parsedData.query.results.channel.location.city,
+            text: parsedData.query.results.channel.item.condition.text,
+            temp: parsedData.query.results.channel.item.condition.temp
+          };
+          this.setState({
+            currentCondition: conditionData
+          })
+          console.log(this.state.currentCondition)
+          const nextFourDays = parsedData.query.results.channel.item.forecast;
+          let dayArray = [];
+          for (let ii = 0; ii < 4; ii++) {
+            let dayData = {
+              day: nextFourDays[ii].day,
+              text: nextFourDays[ii].text,     
+              high: nextFourDays[ii].high,
+              low: nextFourDays[ii].low
             };
-            this.setState({
-              currentCondition: conditionData
-            })
-            console.log(this.state.currentCondition)
-            const nextFourDays = parsedData.query.results.channel.item.forecast;
-            for (let ii = 0; ii < 4; ii++) {
-              let dayData = {
-                day: nextFourDays[ii].day,
-                text: nextFourDays[ii].text,     
-                high: nextFourDays[ii].high,
-                low: nextFourDays[ii].low
-              };
-              this.setState({ 
-                currentForecast: [
-                  ...this.state.currentForecast, 
-                  dayData
-                ]
-              }); 
-            };
-            console.log(this.state.currentForecast)
-          });
-        }) 
+            dayArray.push(dayData);
+          };
+          this.setState({ 
+            currentForecast: dayArray
+          }); 
+        });
+      }) 
     };
-    getWeather();
+
+  toggleCity = () => {
+    const nextIndex = (this.state.currentLocation.index + 1);
+    const newLocation = {
+      city: this.state.savedLocations[nextIndex].city,
+      region: this.state.savedLocations[nextIndex].region,
+      index: nextIndex
+    };
+    this.setState({ 
+      currentLocation: newLocation
+    }, 
+      this.getWeather);
+  };
+
+  componentDidMount() {
+    this.getWeather();
   };
 
   render() {
     return (
-      <Main state={this.state}/>
+      <Main state={this.state} toggleCity={this.toggleCity}/>
     );
   };
 };
