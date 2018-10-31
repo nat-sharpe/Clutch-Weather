@@ -1,6 +1,7 @@
 import React, {Component} from 'react';
 import Main from './components/main';
 import Choose from './components/choose';
+import Add from './components/add';
 
 class App extends Component {
 
@@ -28,9 +29,9 @@ class App extends Component {
       },
       currentCondition: {},
       currentForecast: [],
-      showMain: true,
-      showChoose: true,
-      showAdd: false,
+      showMain: false,
+      showChoose: false,
+      showAdd: true,
     };
   };
 
@@ -47,7 +48,7 @@ class App extends Component {
         };
         this.setState({
           currentCondition: conditionData
-        })
+        });
         console.log(this.state.currentCondition)
         const nextFourDays = parsedData.query.results.channel.item.forecast;
         let dayArray = [];
@@ -91,26 +92,16 @@ class App extends Component {
   };
 
   chooseLocation = () => {
-    let nextIndex; 
-    if (this.state.currentLocation.index === (this.state.savedLocations.length - 1)) {
-      nextIndex = 0; 
-    } else {
-      nextIndex = (this.state.currentLocation.index + 1); 
-    };
-    const newLocation = {
-      city: this.state.savedLocations[nextIndex].city,
-      region: this.state.savedLocations[nextIndex].region,
-      index: nextIndex
-    };
     this.setState({ 
-      currentLocation: newLocation
-    }, 
-      this.getWeather);
+      showAdd: true
+    })
   };
 
   render() {
     if (this.state.showMain) {
       return <Main state={this.state} toggleLocation={this.toggleLocation}/>
+    } else if (this.state.showAdd) {
+      return <Add state={this.state} />
     } else if (this.state.showChoose) {
       return <Choose state={this.state} />
     }
