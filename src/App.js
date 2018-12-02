@@ -1,7 +1,7 @@
-import React, {Component} from 'react';
-import Main from './components/main';
-import Choose from './components/choose';
-import Add from './components/add';
+import React, { Component } from 'react';
+import SingleLocation from './containers/SingleLocation';
+import EveryLocation from './containers/EveryLocation';
+import AddLocation from './containers/AddLocation';
 
 class App extends Component {
 
@@ -29,9 +29,7 @@ class App extends Component {
       },
       currentCondition: {},
       currentForecast: [],
-      showMain: false,
-      showChoose: false,
-      showAdd: true,
+      visiblePage: 'single',
     };
   };
 
@@ -84,26 +82,26 @@ class App extends Component {
       region: this.state.savedLocations[nextIndex].region,
       index: nextIndex
     };
-    console.log(newLocation)
+    console.log(newLocation);
     this.setState({ 
       currentLocation: newLocation
     }, 
       this.getWeather);
   };
 
-  chooseLocation = () => {
+  everyLocation = () => {
     this.setState({ 
-      showAdd: true
+      visiblePage: 'every',
     })
   };
 
   render() {
-    if (this.state.showMain) {
-      return <Main state={this.state} toggleLocation={this.toggleLocation}/>
-    } else if (this.state.showAdd) {
-      return <Add state={this.state} />
-    } else if (this.state.showChoose) {
-      return <Choose state={this.state} />
+    if (this.state.visiblePage === 'single') {
+      return <SingleLocation state={this.state} toggleLocation={this.toggleLocation} everyLocation={this.everyLocation} />
+    } else if (this.state.visiblePage === 'every') {
+      return <EveryLocation state={this.state} />
+    } else if (this.state.visiblePage === 'add') {
+      return <AddLocation state={this.state} />
     }
   };
 };

@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class Choose extends Component {
+class EveryLocation extends Component {
   render() {
     const locationRows = [];
     const locations = this.props.state.savedLocations;
@@ -26,4 +26,4 @@ class Choose extends Component {
   };
 };
 
-export default Choose;
+export default EveryLocation;

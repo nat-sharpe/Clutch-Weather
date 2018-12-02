@@ -1,6 +1,6 @@
 import React, {Component} from 'react';
 
-class Main extends Component {
+class SingleLocation extends Component {
   render() {
     const forecastRows = [];
     const forecastData = this.props.state.currentForecast;
@@ -41,4 +41,4 @@ class Main extends Component {
   };
 };
 
-export default Main;
+export default SingleLocation;
