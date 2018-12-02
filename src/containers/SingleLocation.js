@@ -21,7 +21,7 @@ class SingleLocation extends Component {
     return (
       <div className="single-main">
         <div className="current">
-          <h2 className="current-city">{this.props.state.currentCondition.city}</h2>
+          <h2 className="current-city">{this.props.state.currentLocation.city}</h2>
           <p className="current-weather" >{this.props.state.currentCondition.text}</p>
           <h1 className="current-temp">{this.props.state.currentCondition.temp}°</h1>
         </div>
@@ -33,7 +33,7 @@ class SingleLocation extends Component {
             <button onClick={this.props.toggleLeft} type="button">{'<'}</button>
           </div>  
           <div className="location-all">
-            <button onClick={this.props.viewLocations} type="button">Your Locations</button>
+            <button onClick={this.props.viewEvery} type="button">Your Locations</button>
           </div> 
           <div className="toggle">
             <button onClick={this.props.toggleRight} type="button">{'>'}</button>

@@ -104,10 +104,23 @@ class App extends Component {
     this.toggleLocation('right');
   };
 
-  viewLocations = () => {
+  viewEvery = () => {
     this.setState({ 
       visiblePage: 'every',
     })
+  };
+
+  viewSingle = index => {
+    const location = this.state.savedLocations[index];
+    this.setState({
+      visiblePage: 'single',
+      currentLocation: {
+        city: location.city,
+        region: location.region,
+        index: index,
+      }
+    }, () => this.getWeather());
+    console.log('current', this.state.currentLocation)
   };
 
   deleteLocation = title => {
@@ -124,10 +137,14 @@ class App extends Component {
         state={this.state} 
         toggleLeft={this.toggleLeft}
         toggleRight={this.toggleRight}  
-        viewLocations={this.viewLocations} 
+        viewEvery={this.viewEvery} 
       />
     } else if (this.state.visiblePage === 'every') {
-      page = <EveryLocation state={this.state} deleteLocation={this.deleteLocation} />
+      page = <EveryLocation 
+        state={this.state} 
+        deleteLocation={this.deleteLocation} 
+        viewSingle={this.viewSingle}
+      />
     } else if (this.state.visiblePage === 'add') {
       page = <AddLocation state={this.state} />
     };

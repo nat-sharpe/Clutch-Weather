@@ -8,19 +8,23 @@ class EveryLocation extends Component {
     const locations = this.props.state.savedLocations;
 
     locations.forEach((location, index) => {
+      const handleView = () => this.props.viewSingle(index);
+
       const handleDelete = () => this.props.deleteLocation(location.title);
+
       const deleteButton = 
         (locations.length > 1) ? 
         <button className="row-delete" onClick={handleDelete}>X</button> :
         null;
-        
+
       locationRows.push(
         <li className="locations-row" key={index}>
-          <h3 className="row-city">{`${location.city}, ${location.region}`}</h3>
+          <h3 className="row-city" onClick={handleView}>{`${location.city}, ${location.region}`}</h3>
           {deleteButton}
         </li>
       )
     });
+
     return (
       <div className="every-main">
         <div className="locations">
