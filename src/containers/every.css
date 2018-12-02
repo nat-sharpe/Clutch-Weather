@@ -1,0 +1,34 @@
+.every-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.locations {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.locations-row {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+}
+
+.row-city {
+  width: 75%;
+  text-align: left;
+}
+
+.row-delete {
+  width: 25%;
+  text-align: left;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}

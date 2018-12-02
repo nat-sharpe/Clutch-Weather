@@ -12,15 +12,18 @@ class App extends Component {
       savedLocations: [
         {
           city: 'Atlanta',
-          region: 'GA'
+          region: 'GA',
+          title: 'Yahoo! Weather - Atlanta, GA, US'
         },
         {
           city: 'New York',
-          region: 'NY'
+          region: 'NY',
+          title: 'Yahoo! Weather - New York, NY, US'
         },
         {
           city: 'San Francisco',
-          region: 'CA'
+          region: 'CA',
+          title: 'Yahoo! Weather - San Francisco, CA, US'
         }
       ],
       currentLocation: {
@@ -42,8 +45,10 @@ class App extends Component {
         const conditionData = {
           city: parsedData.query.results.channel.location.city,
           text: parsedData.query.results.channel.item.condition.text,
-          temp: parsedData.query.results.channel.item.condition.temp
+          temp: parsedData.query.results.channel.item.condition.temp,
+          title: parsedData.query.results.channel.title
         };
+
         this.setState({
           currentCondition: conditionData
         });
@@ -105,6 +110,13 @@ class App extends Component {
     })
   };
 
+  deleteLocation = title => {
+    const newArray = this.state.savedLocations.filter(location => location.title !== title);
+    this.setState({
+      savedLocations: newArray
+    });
+  };
+
   render() {
     let page;
     if (this.state.visiblePage === 'single') {
@@ -115,7 +127,7 @@ class App extends Component {
         viewLocations={this.viewLocations} 
       />
     } else if (this.state.visiblePage === 'every') {
-      page = <EveryLocation state={this.state} />
+      page = <EveryLocation state={this.state} deleteLocation={this.deleteLocation} />
     } else if (this.state.visiblePage === 'add') {
       page = <AddLocation state={this.state} />
     };

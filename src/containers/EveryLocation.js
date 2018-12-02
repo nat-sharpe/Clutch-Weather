@@ -1,21 +1,31 @@
 import React, {Component} from 'react';
+import './every.css';
 
 class EveryLocation extends Component {
   render() {
+
     const locationRows = [];
     const locations = this.props.state.savedLocations;
+
     locations.forEach((location, index) => {
+      const handleDelete = () => this.props.deleteLocation(location.title);
+      const deleteButton = 
+        (locations.length > 1) ? 
+        <button className="row-delete" onClick={handleDelete}>X</button> :
+        null;
+        
       locationRows.push(
-        <li className="location-row" key={index}>
-          <p>{location.city}</p>
+        <li className="locations-row" key={index}>
+          <h3 className="row-city">{`${location.city}, ${location.region}`}</h3>
+          {deleteButton}
         </li>
       )
     });
     return (
-      <div className="choose">
-        <ul className="forecast">
+      <div className="every-main">
+        <div className="locations">
           {locationRows}
-        </ul>
+        </div>
         <div className="nav">
           <div className="add-location">
             <button onClick={this.props.addLocation} type="button">Add Location</button>
