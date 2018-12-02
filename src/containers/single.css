@@ -1,0 +1,49 @@
+.single-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.current {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.forecast {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.forecast-row {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+}
+
+.row-day {
+  width: 25%;
+  text-align: left;
+}
+
+.row-weather {
+  width: 55%;
+  text-align: left;}
+
+.row-high {
+  width: 10%;
+  text-align: left;
+}
+
+.row-low {
+  width: 10%;
+  text-align: left;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}

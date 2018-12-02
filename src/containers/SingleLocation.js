@@ -1,4 +1,5 @@
 import React, {Component} from 'react';
+import './single.css'
 
 class SingleLocation extends Component {
   render() {
@@ -24,17 +25,17 @@ class SingleLocation extends Component {
           <p className="current-weather" >{this.props.state.currentCondition.text}</p>
           <h1 className="current-temp">{this.props.state.currentCondition.temp}°</h1>
         </div>
-        <ul className="forecast">
+        <div className="forecast">
           {forecastRows}
-        </ul>
+        </div>
         <div className="footer">
-          <div className="toggle-left">
+          <div className="toggle">
             <button onClick={this.props.toggleLeft} type="button">{'<'}</button>
           </div>  
           <div className="location-all">
             <button onClick={this.props.viewLocations} type="button">Your Locations</button>
           </div> 
-          <div className="toggle-left">
+          <div className="toggle">
             <button onClick={this.props.toggleRight} type="button">{'>'}</button>
           </div>  
         </div>

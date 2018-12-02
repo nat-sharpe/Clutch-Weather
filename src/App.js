@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import './App.css';
 import SingleLocation from './containers/SingleLocation';
 import EveryLocation from './containers/EveryLocation';
 import AddLocation from './containers/AddLocation';
@@ -70,11 +71,11 @@ class App extends Component {
 
   toggleLocation = (direction) => {
   
+    const currentIndex = this.state.currentLocation.index;
     let nextIndex; 
-    let currentIndex = this.state.currentLocation.index;
 
     if (direction === 'left') {
-      nextIndex = (currentIndex === 0) ? this.state.savedLocations.length - 1 : currentIndex -1; 
+      nextIndex = (currentIndex === 0) ? this.state.savedLocations.length - 1 : currentIndex - 1; 
     } else if (direction === 'right') {
       nextIndex = (currentIndex === this.state.savedLocations.length - 1) ? 0 : currentIndex + 1; 
     }
@@ -105,18 +106,25 @@ class App extends Component {
   };
 
   render() {
+    let page;
     if (this.state.visiblePage === 'single') {
-      return <SingleLocation 
+      page = <SingleLocation 
         state={this.state} 
         toggleLeft={this.toggleLeft}
         toggleRight={this.toggleRight}  
         viewLocations={this.viewLocations} 
       />
     } else if (this.state.visiblePage === 'every') {
-      return <EveryLocation state={this.state} />
+      page = <EveryLocation state={this.state} />
     } else if (this.state.visiblePage === 'add') {
-      return <AddLocation state={this.state} />
-    }
+      page = <AddLocation state={this.state} />
+    };
+
+    return (
+      <div className='app'>
+        {page}
+      </div>
+    )
   };
 };
 
