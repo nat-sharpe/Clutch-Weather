@@ -10,7 +10,7 @@ class EveryLocation extends Component {
     locations.forEach((location, index) => {
       const handleView = () => this.props.viewSingle(index);
 
-      const handleDelete = () => this.props.deleteLocation(location.title);
+      const handleDelete = () => this.props.deleteLocation(location.uniqueId);
 
       const deleteButton = 
         (locations.length > 1) ? 

@@ -13,12 +13,13 @@ class App extends Component {
         {
           city: 'Atlanta',
           region: 'GA',
-          title: 'Yahoo! Weather - Atlanta, GA, US'
+          uniqueId: 'initial_city'
         }
       ],
       currentLocation: {
         city: 'Atlanta',
         region: 'GA',
+        uniqueId: 'initial_city',
         index: 0
       },
       currentCondition: {},
@@ -37,7 +38,6 @@ class App extends Component {
           city: parsedData.query.results.channel.location.city,
           text: parsedData.query.results.channel.item.condition.text,
           temp: parsedData.query.results.channel.item.condition.temp,
-          title: parsedData.query.results.channel.title
         };
 
         this.setState({
@@ -119,14 +119,15 @@ class App extends Component {
     });
   };
 
-  deleteLocation = title => {
-    const newArray = this.state.savedLocations.filter(location => location.title !== title);
+  deleteLocation = uniqueId => {
+    const newArray = this.state.savedLocations.filter(location => location.uniqueId !== uniqueId);
     this.setState({
       savedLocations: newArray
     });
   };
 
   addNew = location => {
+
     this.setState({
       visiblePage: 'every',
       matchingCities: [],
@@ -134,6 +135,7 @@ class App extends Component {
       currentLocation: {
         city: location.city,
         region: location.region,
+        id: location.uniqueId,
         index: this.state.savedLocations.length
       }
     }, () => {
@@ -150,17 +152,20 @@ class App extends Component {
         console.log('data', parsedData)
         const matchingCities = [];
         const results = parsedData.query.results;
+        const uniqueId = () => 'id-city' + Math.random().toString(36).substr(2, 16);
         if (results && Array.isArray(results.place)) {
           results.place.forEach(place => {
             matchingCities.push({
               city: place.name,
-              region: (place.admin1 && place.admin1.code !== '') ? place.admin1.code.slice(3) : place.country.content
+              region: (place.admin1 && place.admin1.code !== '') ? place.admin1.code.slice(3) : place.country.content,
+              uniqueId: uniqueId
             });
           });
         } else if (results && results.place) {
           matchingCities.push({
             city: results.place.name,
-            region: (results.place.admin1 && results.place.admin1.code !== '') ? results.place.admin1.code.slice(3) : results.place.country.content
+            region: (results.place.admin1 && results.place.admin1.code !== '') ? results.place.admin1.code.slice(3) : results.place.country.content,
+            uniqueId: uniqueId
           });
         }
         this.setState({
