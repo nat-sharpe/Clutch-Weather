@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './styles/single.css'
 
 class SingleLocation extends Component {
   render() {

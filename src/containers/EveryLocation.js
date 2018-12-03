@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './styles/every.css';
 
 class EveryLocation extends Component {
   render() {
@@ -30,7 +29,7 @@ class EveryLocation extends Component {
           {locationRows}
         </div>
         <div className="footer">  
-          <div className="view-every" onClick={this.props.viewAdd}>
+          <div className="view-add-big" onClick={this.props.viewAdd}>
             <h3>Add</h3>
           </div> 
         </div>

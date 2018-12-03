@@ -1,5 +1,4 @@
 import React, {Component} from 'react';
-import './styles/add.css';
 
 class AddLocation extends Component {
       
@@ -22,7 +21,7 @@ class AddLocation extends Component {
 
       matchRows.push(
         <li className="locations-row" key={`${location.city}${index}`}>
-          <h3 className="row-city" onClick={handleAdd}>{`${location.city}, ${location.region}`}</h3>
+          <p className="row-city" onClick={handleAdd}>{`${location.city}, ${location.region}`}</p>
         </li>
       )
     });
@@ -41,7 +40,7 @@ class AddLocation extends Component {
           {matchRows}
         </div>
         <div className="footer">  
-          <div className="view-every" onClick={this.props.viewEvery}>
+          <div className="view-every-big" onClick={this.props.viewEvery}>
             <h3>Your Locations</h3>
           </div> 
         </div>

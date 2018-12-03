@@ -4,6 +4,7 @@
   display: flex;
   flex-direction: column;
   justify-content: space-between;
+  align-items: center;
   background-color: #2a2634;
   color: white;
 }
@@ -49,7 +50,7 @@
 }
 
 .view-every:hover{
-  background-color:white;
+  background-color: rgb(127, 192, 178);
   border-radius: 10px;
 }
 
@@ -63,6 +64,252 @@
 }
 
 .toggle-location:hover{
-  background-color:white;
+  background-color: rgb(127, 192, 178);
   border-radius: 10px;
 }
+
+.single-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.every-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.add-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+
+.search {
+  padding-top: 40px;
+  padding-left: 20px;
+}
+
+.search-input {
+  padding: 12px 15px;
+  font-size: 18px;
+  width: 70%;
+  background-color: #0d0d0f;
+  border-color: #2a2634;
+  border-radius: 10px;
+  color: white;
+}
+
+.search-input:focus {outline:0;}
+
+.matches {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.match-row {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+}
+
+.row-city {
+  width: 100%;
+  text-align: left;
+}
+
+.view-every-big {
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.view-every-big:hover{
+  background-color: rgb(127, 192, 178);
+  border-radius: 10px;
+}
+
+.current {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 45%;
+}
+
+.line {
+  width: 100%;
+  border-color: #159D80;
+  margin: 0;
+}
+
+.forecast-or-info {
+  display: flex;
+  flex-wrap: wrap;
+  height: 30%;
+  padding: 30px 0 0 15px;
+}
+
+.forecast-row {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+  width: 100%;
+}
+
+.row-day {
+  width: 25%;
+  text-align: left;
+  font-weight: bold;
+}
+
+.row-weather {
+  width: 50%;
+  text-align: left;}
+
+.row-high {
+  width: 15%;
+  text-align: left;
+  font-weight: bold;
+}
+
+.row-low {
+  width: 10%;
+  text-align: left;
+}
+
+.info-row {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 50%;
+}
+
+.row-data {
+  font-weight: bold;
+  margin-top: 15px;
+}
+
+.toggle-info {
+  width: 100%;
+  display: flex;
+  justify-content: left;
+  color: #159D80;
+  cursor: pointer;
+  padding: 20px 15px;
+}
+
+.toggle-info:hover{
+  color: white;
+}
+
+
+.locations {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 40px;
+  height: 60%;
+}
+
+.locations-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  list-style-type: none;
+  height: 70px;
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: #159D80;
+}
+
+.row-city {
+  width: 75%;
+  height: 100%;
+  padding: 0px 0px 0 20px;
+  display: flex;
+  justify-content: left;
+  align-items: center;
+  cursor: pointer;
+}
+
+.row-delete {
+  width: 25%;
+  height: 100%;
+  text-align: left;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  cursor: pointer;
+  color: #159D80;
+}
+
+.row-delete:hover {
+  background-color: #159D80;
+  color: white;
+}
+
+.row-city:hover {
+  color: #159D80;
+}
+
+.view-add-big {
+  cursor: pointer;
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.view-add-big:hover{
+  background-color: rgb(127, 192, 178);
+  border-radius: 10px;
+}
+
+@media (min-width: 1024px) {
+ .footer {
+    height: 70px;
+    margin-top: 10px;
+    border-radius: 10px;
+  }
+  .add-main {
+    width: 50%;
+  }
+  .search {
+    padding-left: 0px;
+    width: 100%;
+  }
+  .search-input {
+    width: 95%;
+  }
+  .forecast-or-info {
+    padding: 10% 20% 0 20%;
+  }
+  .single-main {
+    width: 50%;
+  }
+  .current {
+    height: 40%;
+  }
+  .toggle-info {
+    padding: 20px 0;
+  }
+  .every-main {
+    width: 50%;
+  }
+};
