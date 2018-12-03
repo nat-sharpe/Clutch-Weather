@@ -40,6 +40,11 @@ class AddLocation extends Component {
         <div className="locations">
           {matchRows}
         </div>
+        <div className="footer">  
+          <div className="view-every" onClick={this.props.viewEvery}>
+            <h3>Your Locations</h3>
+          </div> 
+        </div>
       </div>
     )
   }

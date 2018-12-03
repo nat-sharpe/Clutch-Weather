@@ -10,12 +10,14 @@
 
 .header {
   width: 100%;
+  height: 20px;
   display: flex;
   justify-content: left;
   align-items: center;
   background-color: #159D80;
   color: #2a2634;
   padding: 10px 0;
+  text-decoration: none;
 }
 
 .title {
@@ -25,5 +27,42 @@
 .logo {
   width: 20px;
   height: 20px;
-  margin: 0 10px 0 10px;
+  margin: 0 15px;
+}
+
+.footer {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #159D80;
+  color: #2a2634;
+  height: 60px;
+}
+
+.view-every {
+  cursor: pointer;
+  width: 60%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.view-every:hover{
+  background-color: rgb(89, 175, 157);
+  border-radius: 10px;
+}
+
+.toggle-location {
+  cursor: pointer;
+  width: 20%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.toggle-location:hover{
+  background-color: rgb(89, 175, 157);
+  border-radius: 10px;
 }

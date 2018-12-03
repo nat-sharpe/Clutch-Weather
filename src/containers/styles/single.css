@@ -11,7 +11,7 @@
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  height: 50%;
+  height: 45%;
 }
 
 .line {
@@ -23,8 +23,8 @@
 .forecast-or-info {
   display: flex;
   flex-wrap: wrap;
-  height: 40%;
-  padding: 30px 10px;
+  height: 30%;
+  padding: 30px 0 0 15px;
 }
 
 .forecast-row {
@@ -41,12 +41,13 @@
 }
 
 .row-weather {
-  width: 55%;
+  width: 50%;
   text-align: left;}
 
 .row-high {
-  width: 10%;
+  width: 15%;
   text-align: left;
+  font-weight: bold;
 }
 
 .row-low {
@@ -64,7 +65,7 @@
 
 .row-data {
   font-weight: bold;
-  margin-top: 10px;
+  margin-top: 15px;
 }
 
 .toggle-info {
@@ -73,46 +74,10 @@
   justify-content: left;
   color: #159D80;
   cursor: pointer;
-  margin: 20px 10px;
+  padding: 20px 15px;
 }
 
 .toggle-info:hover{
   color: rgb(89, 175, 157);
 }
 
-.footer {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  background-color: #159D80;
-  color: #2a2634;
-  height: 10%;
-}
-
-.view-every {
-  cursor: pointer;
-  width: 60%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 100%;
-}
-
-.view-every:hover{
-  background-color: rgb(89, 175, 157);
-  border-radius: 10px;
-}
-
-.toggle-location {
-  cursor: pointer;
-  width: 20%;
-  height: 100%;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.toggle-location:hover{
-  background-color: rgb(89, 175, 157);
-  border-radius: 10px;
-}

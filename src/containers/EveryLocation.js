@@ -13,7 +13,7 @@ class EveryLocation extends Component {
 
       const deleteButton = 
         (locations.length > 1) ? 
-        <button className="row-delete" onClick={handleDelete}>X</button> :
+        <div className="row-delete" onClick={handleDelete}><h3>X</h3></div> :
         null;
 
       locationRows.push(
@@ -29,10 +29,10 @@ class EveryLocation extends Component {
         <div className="locations">
           {locationRows}
         </div>
-        <div className="nav">
-          <div className="add-location">
-            <button onClick={this.props.viewAdd} type="button">Add Location</button>
-          </div>
+        <div className="footer">  
+          <div className="view-every" onClick={this.props.viewAdd}>
+            <h3>Add Location</h3>
+          </div> 
         </div>
       </div>
     );

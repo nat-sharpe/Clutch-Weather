@@ -234,6 +234,7 @@ class App extends Component {
         getMatches={this.getMatches} 
         clearSearch={this.clearSearch} 
         addNew={this.addNew}
+        viewEvery={this.viewEvery}
       />
     };
 
