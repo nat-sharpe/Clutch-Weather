@@ -1,0 +1,29 @@
+.add-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 100%;
+  width: 100%;
+}
+
+.matches {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+
+.match-row {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+}
+
+.row-city {
+  width: 100%;
+  text-align: left;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+}
