@@ -33,7 +33,8 @@ class App extends Component {
       },
       currentCondition: {},
       currentForecast: [],
-      visiblePage: 'single',
+      visiblePage: 'add',
+      matchingCities: []
     };
   };
 
@@ -120,7 +121,6 @@ class App extends Component {
         index: index,
       }
     }, () => this.getWeather());
-    console.log('current', this.state.currentLocation)
   };
 
   deleteLocation = title => {
@@ -128,6 +128,35 @@ class App extends Component {
     this.setState({
       savedLocations: newArray
     });
+  };
+
+  getMatches = (inputCity) => {
+    console.log('input', inputCity)
+    fetch(`https://query.yahooapis.com/v1/public/yql?q=select * from geo.places(all) where text="${inputCity}*" and country = "United States"&format=json`)
+    .then(data => {
+      const jsonResult = data.json();
+      jsonResult.then(parsedData => {
+        console.log('data', parsedData)
+        const matchingCities = [];
+        const results = parsedData.query.results;
+        if (results && Array.isArray(results.place)) {
+          results.place.forEach(place => {
+            matchingCities.push({
+              city: place.name,
+              region: place.admin1.code.slice(3)
+            });
+          });
+        } else if (results && results.place) {
+          matchingCities.push({
+            city: results.place.name,
+            region: results.place.admin1.code.slice(3)
+          });
+        }
+        this.setState({
+          matchingCities: matchingCities
+        })
+      })
+    }); 
   };
 
   render() {
@@ -144,9 +173,13 @@ class App extends Component {
         state={this.state} 
         deleteLocation={this.deleteLocation} 
         viewSingle={this.viewSingle}
+        addLocation={this.addLocation}
       />
     } else if (this.state.visiblePage === 'add') {
-      page = <AddLocation state={this.state} />
+      page = <AddLocation 
+        state={this.state}
+        getMatches={this.getMatches} 
+      />
     };
 
     return (
