@@ -4,9 +4,11 @@ import './styles/single.css'
 class SingleLocation extends Component {
   render() {
     let forecastOrInfo = [];
+    let toggleMessage = '';
 
     if (this.props.state.viewInfo) {
       const infoData = this.props.state.currentCondition.info;
+      toggleMessage = 'Forecast';
       infoData.forEach((info, index) => {
         forecastOrInfo.push(
           <li className="info-row" key={index}>
@@ -17,6 +19,7 @@ class SingleLocation extends Component {
       });
     } else {
       const forecastData = this.props.state.currentForecast;
+      toggleMessage = 'More Data';
       forecastData.forEach((dayData, index) => {
         let day = (index === 0) ? 'Today' : dayData.day;
         forecastOrInfo.push(
@@ -41,7 +44,7 @@ class SingleLocation extends Component {
           {forecastOrInfo}
         </div>
         <div className="toggle-info">
-          <button onClick={this.props.toggleInfo} type="button">Toggle Weather Data</button>
+          <button onClick={this.props.toggleInfo} type="button">{toggleMessage}</button>
         </div>
         <div className="footer">
           <div className="toggle-location">

@@ -43,6 +43,12 @@
   text-align: left;
 }
 
+.toggle-info {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
 .footer {
   display: flex;
   justify-content: space-between;

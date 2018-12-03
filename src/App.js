@@ -199,7 +199,6 @@ class App extends Component {
   };
 
   toggleInfo = () => {
-    console.log('here')
     this.setState({
       viewInfo: !this.state.viewInfo,
     })
