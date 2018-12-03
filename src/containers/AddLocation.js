@@ -21,7 +21,7 @@ class AddLocation extends Component {
       const handleAdd = () => this.props.addNew(location);
 
       matchRows.push(
-        <li className="match-row" key={`${location.city}${index}`}>
+        <li className="locations-row" key={`${location.city}${index}`}>
           <h3 className="row-city" onClick={handleAdd}>{`${location.city}, ${location.region}`}</h3>
         </li>
       )
@@ -29,13 +29,13 @@ class AddLocation extends Component {
 
     return (
       <div className="add-main">
-        <form>
+        <form className="search">
           <input
+            className="search-input"
             type="text"
             onChange={event => this.handleChange(event)}
-            placeholder="Search by City in USA"
+            placeholder="Search by US City"
           />
-          {/* <button type="submit">Submit!</button> */}
         </form>
         <div className="locations">
           {matchRows}

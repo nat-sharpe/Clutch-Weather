@@ -31,7 +31,7 @@ class EveryLocation extends Component {
         </div>
         <div className="footer">  
           <div className="view-every" onClick={this.props.viewAdd}>
-            <h3>Add Location</h3>
+            <h3>Add</h3>
           </div> 
         </div>
       </div>

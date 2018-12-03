@@ -11,6 +11,7 @@
   flex-direction: column;
   justify-content: flex-start;
   padding-top: 40px;
+  height: 70%;
 }
 
 .locations-row {
@@ -43,12 +44,14 @@
   align-items: center;
   font-weight: bold;
   cursor: pointer;
+  color: #159D80;
 }
 
 .row-delete:hover {
   background-color: #159D80;
+  color: white;
 }
 
 .row-city:hover {
-  background-color: #159D80;
+  color: #159D80;
 }
