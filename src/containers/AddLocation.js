@@ -16,11 +16,11 @@ class AddLocation extends Component {
     const matches = this.props.state.matchingCities;
 
     matches.forEach((location, index) => {
-      const handleSelect = () => this.props.viewSingle(location);
+      const handleAdd = () => this.props.addNew(location);
 
       matchRows.push(
         <li className="match-row" key={`${location.city}${index}`}>
-          <h3 className="row-city" onClick={handleSelect}>{`${location.city}, ${location.region}`}</h3>
+          <h3 className="row-city" onClick={handleAdd}>{`${location.city}, ${location.region}`}</h3>
         </li>
       )
     });

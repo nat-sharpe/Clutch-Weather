@@ -32,7 +32,7 @@ class EveryLocation extends Component {
         </div>
         <div className="nav">
           <div className="add-location">
-            <button onClick={this.props.addLocation} type="button">Add Location</button>
+            <button onClick={this.props.viewAdd} type="button">Add Location</button>
           </div>
         </div>
       </div>

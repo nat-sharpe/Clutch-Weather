@@ -14,16 +14,6 @@ class App extends Component {
           city: 'Atlanta',
           region: 'GA',
           title: 'Yahoo! Weather - Atlanta, GA, US'
-        },
-        {
-          city: 'New York',
-          region: 'NY',
-          title: 'Yahoo! Weather - New York, NY, US'
-        },
-        {
-          city: 'San Francisco',
-          region: 'CA',
-          title: 'Yahoo! Weather - San Francisco, CA, US'
         }
       ],
       currentLocation: {
@@ -33,7 +23,7 @@ class App extends Component {
       },
       currentCondition: {},
       currentForecast: [],
-      visiblePage: 'add',
+      visiblePage: 'single',
       matchingCities: []
     };
   };
@@ -123,10 +113,31 @@ class App extends Component {
     }, () => this.getWeather());
   };
 
+  viewAdd = () => {
+    this.setState({
+      visiblePage: 'add',
+    });
+  };
+
   deleteLocation = title => {
     const newArray = this.state.savedLocations.filter(location => location.title !== title);
     this.setState({
       savedLocations: newArray
+    });
+  };
+
+  addNew = location => {
+    this.setState({
+      visiblePage: 'every',
+      matchingCities: [],
+      savedLocations: [...this.state.savedLocations, location],
+      currentLocation: {
+        city: location.city,
+        region: location.region,
+        index: this.state.savedLocations.length
+      }
+    }, () => {
+      this.getWeather();
     });
   };
 
@@ -143,13 +154,13 @@ class App extends Component {
           results.place.forEach(place => {
             matchingCities.push({
               city: place.name,
-              region: place.admin1.code.slice(3)
+              region: (place.admin1 && place.admin1.code !== '') ? place.admin1.code.slice(3) : place.country.content
             });
           });
         } else if (results && results.place) {
           matchingCities.push({
             city: results.place.name,
-            region: results.place.admin1.code.slice(3)
+            region: (results.place.admin1 && results.place.admin1.code !== '') ? results.place.admin1.code.slice(3) : results.place.country.content
           });
         }
         this.setState({
@@ -173,12 +184,13 @@ class App extends Component {
         state={this.state} 
         deleteLocation={this.deleteLocation} 
         viewSingle={this.viewSingle}
-        addLocation={this.addLocation}
+        viewAdd={this.viewAdd}
       />
     } else if (this.state.visiblePage === 'add') {
       page = <AddLocation 
         state={this.state}
         getMatches={this.getMatches} 
+        addNew={this.addNew}
       />
     };
 
