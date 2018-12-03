@@ -9,19 +9,8 @@ class App extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      savedLocations: [
-        {
-          city: 'Atlanta',
-          region: 'GA',
-          uniqueId: 'initial_city'
-        }
-      ],
-      currentLocation: {
-        city: 'Atlanta',
-        region: 'GA',
-        uniqueId: 'initial_city',
-        index: 0
-      },
+      savedLocations: [],
+      currentLocation: {},
       currentCondition: {},
       currentForecast: [],
       visiblePage: 'single',
@@ -62,7 +51,30 @@ class App extends Component {
   };
 
   componentDidMount() {
-    this.getWeather();
+    const checkStorage = localStorage.getItem('saved-locations');
+    let savedLocations = [];
+    if (checkStorage) {
+      savedLocations = JSON.parse(checkStorage);
+    } else {
+      savedLocations = [
+        {
+          city: 'Atlanta',
+          region: 'GA',
+          uniqueId: 'default_location'
+        }
+      ];
+    };
+    console.log(savedLocations)
+    this.setState({
+      savedLocations: savedLocations,
+      currentLocation: {
+        ...savedLocations[0],
+        index: 0
+      }
+    }, 
+    () => {
+      this.getWeather();
+    });
   };
 
   toggleLocation = (direction) => {
@@ -123,11 +135,10 @@ class App extends Component {
     const newArray = this.state.savedLocations.filter(location => location.uniqueId !== uniqueId);
     this.setState({
       savedLocations: newArray
-    });
+    }, () => localStorage.setItem('saved-locations', JSON.stringify(this.state.savedLocations)));
   };
 
   addNew = location => {
-
     this.setState({
       visiblePage: 'every',
       matchingCities: [],
@@ -139,20 +150,19 @@ class App extends Component {
         index: this.state.savedLocations.length
       }
     }, () => {
+      localStorage.setItem('saved-locations', JSON.stringify(this.state.savedLocations));
       this.getWeather();
     });
   };
 
   getMatches = (inputCity) => {
-    console.log('input', inputCity)
     fetch(`https://query.yahooapis.com/v1/public/yql?q=select * from geo.places(all) where text="${inputCity}*" and country = "United States"&format=json`)
     .then(data => {
       const jsonResult = data.json();
       jsonResult.then(parsedData => {
-        console.log('data', parsedData)
-        const matchingCities = [];
+        let matchingCities = [];
         const results = parsedData.query.results;
-        const uniqueId = () => 'id-city' + Math.random().toString(36).substr(2, 16);
+        let uniqueId = 'id-city' + Math.random().toString(36).substr(2, 16);
         if (results && Array.isArray(results.place)) {
           results.place.forEach(place => {
             matchingCities.push({
@@ -170,7 +180,7 @@ class App extends Component {
         }
         this.setState({
           matchingCities: matchingCities
-        })
+        }, () => console.log(this.state.matchingCities))
       })
     }); 
   };

@@ -31,7 +31,7 @@ class AddLocation extends Component {
           <input
             type="text"
             onChange={event => this.handleChange(event)}
-            placeholder="Search by City"
+            placeholder="Search by City in USA"
           />
           {/* <button type="submit">Submit!</button> */}
         </form>
