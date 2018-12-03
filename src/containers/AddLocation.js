@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './add.css';
+import './styles/add.css';
 
 class AddLocation extends Component {
       

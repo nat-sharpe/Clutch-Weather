@@ -14,7 +14,8 @@ class App extends Component {
       currentCondition: {},
       currentForecast: [],
       visiblePage: 'single',
-      matchingCities: []
+      matchingCities: [],
+      viewInfo: false
     };
   };
 
@@ -27,6 +28,16 @@ class App extends Component {
           city: parsedData.query.results.channel.location.city,
           text: parsedData.query.results.channel.item.condition.text,
           temp: parsedData.query.results.channel.item.condition.temp,
+          info: [
+            {type: 'Sunrise',
+            value: parsedData.query.results.channel.astronomy.sunrise},
+            {type: 'Sunset',
+            value: parsedData.query.results.channel.astronomy.sunset},
+            {type: 'Wind',
+            value: `${parsedData.query.results.channel.wind.speed} mph`},
+            {type: 'Humidity',
+            value: `${parsedData.query.results.channel.atmosphere.humidity}%`}
+          ]
         };
 
         this.setState({
@@ -94,7 +105,8 @@ class App extends Component {
       index: nextIndex
     };
     this.setState({ 
-      currentLocation: newLocation
+      currentLocation: newLocation,
+      viewInfo: false
     }, 
       this.getWeather);
   };
@@ -110,6 +122,7 @@ class App extends Component {
   viewEvery = () => {
     this.setState({ 
       visiblePage: 'every',
+      viewInfo: false
     })
   };
 
@@ -185,6 +198,13 @@ class App extends Component {
     }); 
   };
 
+  toggleInfo = () => {
+    console.log('here')
+    this.setState({
+      viewInfo: !this.state.viewInfo,
+    })
+  };
+
   render() {
     let page;
     if (this.state.visiblePage === 'single') {
@@ -192,7 +212,8 @@ class App extends Component {
         state={this.state} 
         toggleLeft={this.toggleLeft}
         toggleRight={this.toggleRight}  
-        viewEvery={this.viewEvery} 
+        viewEvery={this.viewEvery}
+        toggleInfo={this.toggleInfo} 
       />
     } else if (this.state.visiblePage === 'every') {
       page = <EveryLocation 

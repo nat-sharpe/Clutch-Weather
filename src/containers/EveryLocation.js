@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import './every.css';
+import './styles/every.css';
 
 class EveryLocation extends Component {
   render() {

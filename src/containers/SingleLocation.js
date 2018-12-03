@@ -1,22 +1,34 @@
 import React, {Component} from 'react';
-import './single.css'
+import './styles/single.css'
 
 class SingleLocation extends Component {
   render() {
-    const forecastRows = [];
-    const forecastData = this.props.state.currentForecast;
+    let forecastOrInfo = [];
 
-    forecastData.forEach((dayData, index) => {
-      let day = (index === 0) ? 'Today' : dayData.day;
-      forecastRows.push(
-        <li className="forecast-row" key={index}>
-          <p className="row-day">{day}</p>
-          <p className="row-weather">{dayData.text}</p>
-          <p className="row-high">{dayData.high}°</p>
-          <p className="row-low">{dayData.low}°</p>
-        </li>
-      )
-    });
+    if (this.props.state.viewInfo) {
+      const infoData = this.props.state.currentCondition.info;
+      infoData.forEach((info, index) => {
+        forecastOrInfo.push(
+          <li className="info-row" key={index}>
+            <p className="row-title">{info.type}</p>
+            <p className="row-data">{info.value}</p>
+          </li>
+        )
+      });
+    } else {
+      const forecastData = this.props.state.currentForecast;
+      forecastData.forEach((dayData, index) => {
+        let day = (index === 0) ? 'Today' : dayData.day;
+        forecastOrInfo.push(
+          <li className="forecast-row" key={index}>
+            <p className="row-day">{day}</p>
+            <p className="row-weather">{dayData.text}</p>
+            <p className="row-high">{dayData.high}°</p>
+            <p className="row-low">{dayData.low}°</p>
+          </li>
+        )
+      });
+    };
 
     return (
       <div className="single-main">
@@ -25,17 +37,20 @@ class SingleLocation extends Component {
           <p className="current-weather" >{this.props.state.currentCondition.text}</p>
           <h1 className="current-temp">{this.props.state.currentCondition.temp}°</h1>
         </div>
-        <div className="forecast">
-          {forecastRows}
+        <div className="forecast-or-info">
+          {forecastOrInfo}
+        </div>
+        <div className="toggle-info">
+          <button onClick={this.props.toggleInfo} type="button">Toggle Weather Data</button>
         </div>
         <div className="footer">
-          <div className="toggle">
+          <div className="toggle-location">
             <button onClick={this.props.toggleLeft} type="button">{'<'}</button>
           </div>  
           <div className="location-all">
             <button onClick={this.props.viewEvery} type="button">Your Locations</button>
           </div> 
-          <div className="toggle">
+          <div className="toggle-location">
             <button onClick={this.props.toggleRight} type="button">{'>'}</button>
           </div>  
         </div>
