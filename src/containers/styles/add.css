@@ -22,8 +22,3 @@
   width: 100%;
   text-align: left;
 }
-
-.footer {
-  display: flex;
-  justify-content: space-between;
-}

@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import Header from './components/Header';
 import SingleLocation from './containers/SingleLocation';
 import EveryLocation from './containers/EveryLocation';
 import AddLocation from './containers/AddLocation';
@@ -27,7 +28,7 @@ class App extends Component {
         const conditionData = {
           city: parsedData.query.results.channel.location.city,
           text: parsedData.query.results.channel.item.condition.text,
-          temp: parsedData.query.results.channel.item.condition.temp,
+          temp: `${parsedData.query.results.channel.item.condition.temp}°`,
           info: [
             {type: 'Sunrise',
             value: parsedData.query.results.channel.astronomy.sunrise},
@@ -193,9 +194,15 @@ class App extends Component {
         }
         this.setState({
           matchingCities: matchingCities
-        }, () => console.log(this.state.matchingCities))
+        })
       })
     }); 
+  };
+
+  clearSearch = () => {
+    this.setState({
+      matchingCities: []
+    });
   };
 
   toggleInfo = () => {
@@ -225,12 +232,14 @@ class App extends Component {
       page = <AddLocation 
         state={this.state}
         getMatches={this.getMatches} 
+        clearSearch={this.clearSearch} 
         addNew={this.addNew}
       />
     };
 
     return (
       <div className='app'>
+        <Header />
         {page}
       </div>
     )

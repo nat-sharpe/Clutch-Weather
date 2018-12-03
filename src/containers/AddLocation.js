@@ -5,8 +5,10 @@ class AddLocation extends Component {
       
   handleChange = (event) => {
     const inputCity = event.target.value;
-    if (inputCity.length > 2) {
+    if (inputCity.length > 1) {
       this.props.getMatches(inputCity) 
+    } else if (inputCity.length < 1) {
+      this.props.clearSearch();
     };
   };
 

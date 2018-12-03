@@ -13,7 +13,7 @@ class SingleLocation extends Component {
         forecastOrInfo.push(
           <li className="info-row" key={index}>
             <p className="row-title">{info.type}</p>
-            <p className="row-data">{info.value}</p>
+            <h3 className="row-data">{info.value}</h3>
           </li>
         )
       });
@@ -38,23 +38,24 @@ class SingleLocation extends Component {
         <div className="current">
           <h2 className="current-city">{this.props.state.currentLocation.city}</h2>
           <p className="current-weather" >{this.props.state.currentCondition.text}</p>
-          <h1 className="current-temp">{this.props.state.currentCondition.temp}°</h1>
+          <h1 className="current-temp">{this.props.state.currentCondition.temp}</h1>
         </div>
+        <hr className="line"/>
         <div className="forecast-or-info">
           {forecastOrInfo}
         </div>
-        <div className="toggle-info">
-          <button onClick={this.props.toggleInfo} type="button">{toggleMessage}</button>
+        <div className="toggle-info" onClick={this.props.toggleInfo}>
+          <h3>{toggleMessage}</h3>
         </div>
         <div className="footer">
-          <div className="toggle-location">
-            <button onClick={this.props.toggleLeft} type="button">{'<'}</button>
+          <div className="toggle-location" onClick={this.props.toggleLeft}>
+            <h3>{'<'}</h3>
           </div>  
-          <div className="location-all">
-            <button onClick={this.props.viewEvery} type="button">Your Locations</button>
+          <div className="view-every" onClick={this.props.viewEvery}>
+            <h3>Your Locations</h3>
           </div> 
-          <div className="toggle-location">
-            <button onClick={this.props.toggleRight} type="button">{'>'}</button>
+          <div className="toggle-location" onClick={this.props.toggleRight}>
+            <h3>{'>'}</h3>
           </div>  
         </div>
       </div>

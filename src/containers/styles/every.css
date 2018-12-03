@@ -27,8 +27,3 @@
   width: 25%;
   text-align: left;
 }
-
-.footer {
-  display: flex;
-  justify-content: space-between;
-}
